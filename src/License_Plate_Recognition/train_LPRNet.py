@@ -66,7 +66,7 @@ def get_parser():
         "--learning_rate", default=0.001, help="base value of learning rate."
     )
     parser.add_argument(
-        "--lpr_max_len", default=16, help="license plate number max length."
+        "--lpr_max_len", type=int, default=16, help="license plate number max length."
     )
     parser.add_argument("--train_batch_size", default=128, help="training batch size.")
     parser.add_argument("--test_batch_size", default=128, help="testing batch size.")
@@ -80,7 +80,7 @@ def get_parser():
         help="Number of workers used in dataloading",
     )
     parser.add_argument(
-        "--cuda", default=True, type=bool, help="Use cuda to train model"
+        "--cuda", default=False, type=bool, help="Use cuda to train model"
     )
     parser.add_argument(
         "--resume_epoch", default=0, type=int, help="resume iter for retraining"
@@ -216,7 +216,7 @@ def train():
         test_img_dirs.split(","), args.img_size, args.lpr_max_len
     )
 
-    epoch_size = len(train_dataset) // args.train_batch_size
+    epoch_size = len(train_dataset) // args.train_batch_size or 1
     max_iter = args.max_epoch * epoch_size
 
     ctc_loss = nn.CTCLoss(
