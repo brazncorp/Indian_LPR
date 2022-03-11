@@ -280,9 +280,9 @@ if __name__ == "__main__":
 
     # load ocr
 
-    lprnet = build_lprnet(lpr_max_len=16, class_num=37).eval()
+    lprnet = build_lprnet(lpr_max_len=16, class_num=49).eval()
     lprnet.load_state_dict(
-        torch.load("weights/best_lprnet.pth", map_location=torch.device("cpu"))
+        torch.load("weights/Final_LPRNet_model.pth", map_location=torch.device("cpu"))
     )
 
     if torch.cuda.is_available():
