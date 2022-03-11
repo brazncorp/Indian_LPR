@@ -53,7 +53,7 @@ def adjust_learning_rate(optimizer, cur_epoch, base_lr, lr_schedule):
 
 def get_parser():
     parser = argparse.ArgumentParser(description="parameters to train net")
-    parser.add_argument("--max_epoch", default=200, help="epoch to train the network")
+    parser.add_argument("--max_epoch", type=int, default=200, help="epoch to train the network")
     parser.add_argument("--img_size", default=(94, 24), help="the image size")
     parser.add_argument(
         "--train_img_dirs", default="./images/train", help="the train images path"
@@ -110,7 +110,7 @@ def get_parser():
     # parser.add_argument('--pretrained_model', default='./weights/Final_LPRNet_model.pth', help='pretrained base model')
     parser.add_argument("--pretrained_model", default="", help="pretrained base model")
 
-    args = parser.parse_args()
+    args, _ = parser.parse_known_args()
 
     return args
 
@@ -126,7 +126,7 @@ def collate_fn(batch):
         labels.extend(label)
         lengths.append(length)
         filenames.append(filename)
-    labels = np.asarray(labels).flatten().astype(np.int)
+    labels = np.asarray(labels).flatten().astype(int)
 
     return (torch.stack(imgs, 0), torch.from_numpy(labels), lengths, filenames)
 

@@ -224,7 +224,7 @@ if __name__ == "__main__":
         help="output directory to save plotted images and text files with results",
     )
 
-    args = parser.parse_args()
+    args, _ = parser.parse_known_args()
 
     os.makedirs(os.path.join(args.output_path, "plots"), exist_ok=True)
     os.makedirs(os.path.join(args.output_path, "jsons"), exist_ok=True)
