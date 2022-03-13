@@ -60,7 +60,7 @@ class LPRDataLoader(Dataset):
             c = c.upper()
             # one_hot_base = np.zeros(len(CHARS))
             # one_hot_base[CHARS_DICT[c]] = 1
-            label.append(CHARS_DICT[c])
+            label.append(CHARS_DICT.get(c, CHARS_DICT['-']))
         # label = label[:10]
         label_length = len(label)
         # print(label, imgname)
